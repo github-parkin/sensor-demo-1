@@ -11,6 +11,3 @@ Install the required packages:
 
 ```bash
 pip install numpy pandas matplotlib
-
-## XYW
-``` xyz
