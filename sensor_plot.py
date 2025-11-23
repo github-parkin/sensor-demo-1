@@ -2,13 +2,14 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
+import matplotlib.dates as mdates
 
 # make time axis
 start = datetime.now()
 times = [start + timedelta(minutes=i) for i in range(1440)]
 
 # generate sensor data
-temp = 22 + np.sin(np.linspace(0, 4*np.pi, 1440)) * 3 + np.random.normal(0, 0.2, 1440)
+temp = 22 + np.sin(np.linspace(0, 4*np.pi, 1440)) * 3 + np.random.normal(0, 2, 1440)
 humidity = 55 + np.cos(np.linspace(0, 4*np.pi, 1440)) * 5 + np.random.normal(0, 0.5, 1440)
 
 # put into DataFrame
@@ -25,6 +26,10 @@ plt.xlabel("Time")
 plt.ylabel("Sensor Reading")
 plt.title("Simulated Environmental Sensor Data")
 plt.legend()
+ax = plt.gca()
+ax.xaxis.set_major_formatter(mdates.DateFormatter("%H:%M"))
+ax.xaxis.set_major_locator(mdates.HourLocator(interval=3))
+plt.xticks(rotation=45)
 plt.tight_layout()
 
 import os
